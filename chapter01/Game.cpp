@@ -3,6 +3,7 @@
 
 Game::Game()
 :mWindow(nullptr)
+,mRenderer(nullptr)
 ,mIsRunning(true)
 {
 
@@ -19,6 +20,7 @@ bool Game::Initialize()
         return false;
     }
 
+    // Create an SDL window
     mWindow = SDL_CreateWindow(
         "Game Programming in C++ (Chapter 01).", // Window title
         100,   // Top left x-coordinate of window
@@ -34,6 +36,20 @@ bool Game::Initialize()
         return false;
     }
 
+
+    // Create SDL renderer
+    mRenderer = SDL_CreateRenderer(
+        mWindow,   // Window to create renderer for
+        -1,   // Usually -1
+        SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC
+    );
+
+    if (!mRenderer)
+    {
+        SDL_Log("Failed to create renderer: %s", SDL_GetError());
+        return false;
+    }
+
     return true;
 }
 
@@ -41,6 +57,7 @@ bool Game::Initialize()
 void Game::Shutdown()
 {
     SDL_DestroyWindow(mWindow);
+    SDL_DestroyRenderer(mRenderer);
     SDL_Quit();
 }
 

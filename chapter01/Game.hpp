@@ -9,7 +9,7 @@ struct Vector2
 };
 
 
-class Game
+class Game 
 {
 public:
     Game();
@@ -28,7 +28,7 @@ private:
     // Window created by SDL
     SDL_Window* mWindow;
     // Renderer for 2D drawing
-    // SDL_Renderer* mRenderer;
+    SDL_Renderer* mRenderer;
     // Number of ticks since start of game
     // Uint32 mTicksCount;
     // Game should continue to run
