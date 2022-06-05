@@ -1,1 +1,0 @@
-/usr/bin/c++ CMakeFiles/01.out.dir/Main.cpp.o CMakeFiles/01.out.dir/Game.cpp.o -o 01.out  -L/usr/local/lib -Wl,-rpath,/usr/local/lib -Wl,--enable-new-dtags -lSDL2 
