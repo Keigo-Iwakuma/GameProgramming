@@ -1,6 +1,10 @@
 #include "Game.hpp"
 
 
+const int tickness = 15;
+const float paddleH = 100.0f;
+
+
 Game::Game()
 :mWindow(nullptr)
 ,mRenderer(nullptr)
@@ -49,6 +53,11 @@ bool Game::Initialize()
         SDL_Log("Failed to create renderer: %s", SDL_GetError());
         return false;
     }
+
+    mPaddlePos.x = 10.0f;
+    mPaddlePos.y = 768.0f/2.0f;
+    mBallPos.x = 1024.0f/2.0f;
+    mBallPos.y = 768.0f/2.0f;
 
     return true;
 }
@@ -117,6 +126,47 @@ void Game::GenerateOutput()
 
     // Clear back buffer
     SDL_RenderClear(mRenderer);
+
+    // Draw walls
+    SDL_SetRenderDrawColor(mRenderer, 255, 255, 255, 255);
+
+    // Draw top wall
+    SDL_Rect wall{
+        0,          // Top left x
+        0,          // Top left y
+        1024,       // Width
+        tickness    // Height
+    };
+    SDL_RenderFillRect(mRenderer, &wall);
+
+    // Draw bottom wall
+    wall.y = 768 - tickness;
+    SDL_RenderFillRect(mRenderer, &wall);
+
+    // Draw right wall
+    wall.x = 1024 - tickness;
+    wall.y = 0;
+    wall.w = tickness;
+    wall.h = 768;
+    SDL_RenderFillRect(mRenderer, &wall);
+
+    // Draw paddle
+    SDL_Rect paddle{
+        static_cast<int>(mPaddlePos.x),
+        static_cast<int>(mPaddlePos.y - paddleH/2),
+        tickness,
+        static_cast<int>(paddleH)
+    };
+    SDL_RenderFillRect(mRenderer, &paddle);
+
+    // Draw ball
+    SDL_Rect ball{
+        static_cast<int>(mBallPos.x - tickness/2),
+        static_cast<int>(mBallPos.y - tickness/2),
+        tickness,
+        tickness
+    };
+    SDL_RenderFillRect(mRenderer, &ball);
 
     // Swap front buffer and back buffer
     SDL_RenderPresent(mRenderer);
