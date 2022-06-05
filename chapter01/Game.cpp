@@ -106,5 +106,19 @@ void Game::UpdateGame()
 
 void Game::GenerateOutput()
 {
+    // Set draw color to blue
+    SDL_SetRenderDrawColor(
+        mRenderer,
+        0,   // R
+        0,   // G
+        255, // B
+        255  // A
+    );
+
+    // Clear back buffer
+    SDL_RenderClear(mRenderer);
+
+    // Swap front buffer and back buffer
+    SDL_RenderPresent(mRenderer);
 
 }
