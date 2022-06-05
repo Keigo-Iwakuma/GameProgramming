@@ -8,6 +8,7 @@ const float paddleH = 100.0f;
 Game::Game()
 :mWindow(nullptr)
 ,mRenderer(nullptr)
+,mTicksCount(0)
 ,mIsRunning(true)
 {
 
@@ -109,7 +110,22 @@ void Game::ProcessInput()
 
 void Game::UpdateGame()
 {
+    // Wait until 16ms has elapsed since last frame
+    while (!SDL_TICKS_PASSED(SDL_GetTicks(), mTicksCount + 16))
+        ;
 
+    // Delta time is the difference in ticks from last frame
+    // (converted to seconds)
+    float deltaTime = (SDL_GetTicks() - mTicksCount) / 1000.0f;
+
+    // Clamp maximum delta time value
+    if (deltaTime > 0.05f)
+    {
+        deltaTime = 0.05f;
+    }
+
+    // Update tick counts (for next time)
+    mTicksCount = SDL_GetTicks();
 }
 
 

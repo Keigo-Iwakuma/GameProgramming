@@ -30,7 +30,7 @@ private:
     // Renderer for 2D drawing
     SDL_Renderer* mRenderer;
     // Number of ticks since start of game
-    // Uint32 mTicksCount;
+    Uint32 mTicksCount;
     // Game should continue to run
     bool mIsRunning;
 
