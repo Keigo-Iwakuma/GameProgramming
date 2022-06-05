@@ -1,0 +1,3 @@
+/home/keigo/Workspace/GameProgramming/chapter01/build/CMakeFiles/01.out.dir
+/home/keigo/Workspace/GameProgramming/chapter01/build/CMakeFiles/edit_cache.dir
+/home/keigo/Workspace/GameProgramming/chapter01/build/CMakeFiles/rebuild_cache.dir
