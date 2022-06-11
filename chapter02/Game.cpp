@@ -147,3 +147,13 @@ void Game::GenerateOutput()
 
     SDL_RenderPresent(mRenderer);
 }
+
+
+void Game::Shutdown()
+{
+    UnloadData();
+    IMG_Quit();
+    SDL_DestroyRenderer(mRenderer);
+    SDL_DestroyWindow(mWindow);
+    SDL_Quit();
+}
