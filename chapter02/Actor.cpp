@@ -25,3 +25,36 @@ Actor::~Actor()
         delete mComponents.back();
     }
 }
+
+
+void Actor::Update(float deltaTime)
+{
+    if (mState == EActive)
+    {
+        UpdateComponents(deltaTime);
+        UpdateActor(deltaTime);
+    }
+}
+
+
+void Actor::UpdateActor(float deltaTime)
+{
+}
+
+
+void Actor::AddComponent(Component* component)
+{
+    // Find the insertion point in the sorted vector
+    // (The first element with a order higher than me)
+    int mOrder = component->GetUpdateOrder();
+    auto iter = mComponents.begin();
+    for (;
+        iter != mComponents.end();
+        ++iter)
+    {
+        if (mOrder < (*iter)->GetUpdateOrder())
+        {
+            break;
+        }
+    }
+}
