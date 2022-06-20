@@ -235,3 +235,45 @@ public:
     static const Vector2 NegUnitX;
     static const Vector2 NegUnitY;
 };
+
+
+// 3D Vector
+class Vector3
+{
+public:
+    float x;
+    float y;
+    float z;
+
+    Vector3()
+        :x(0.0f)
+        ,y(0.0f)
+        ,z(0.0f)
+    {}
+
+    explicit Vector3(float inX, float inY, float inZ)
+        :x(inX)
+        ,y(inY)
+        ,z(inZ)
+    {}
+
+    // Cast to a const float pointer
+    const float* GetAsFloatPtr() const
+    {
+        return reinterpret_cast<const float*>(&x);
+    }
+
+    // Set all three components in one line
+    void Set(float inX, float inY, float inZ)
+    {
+        x = inX;
+        y = inY;
+        z = inZ;
+    }
+
+    // Vector addition (a + b)
+    friend Vector3 operator+(const Vector3& a, const Vector3& b)
+    {
+        return Vector3(a.x + b.x, a.y + b.y, a.z + b.z);
+    }
+};
