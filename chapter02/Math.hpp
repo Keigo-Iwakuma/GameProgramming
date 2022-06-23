@@ -276,4 +276,99 @@ public:
     {
         return Vector3(a.x + b.x, a.y + b.y, a.z + b.z);
     }
+
+    // Vector substraction (a - b)
+    friend Vector3 operator-(const Vector3& a, const Vector3& b)
+    {
+        return Vector3(a.x - b.x, a.y - b.y, a.z - b.z);
+    }
+
+    // Component-wise multiplication
+    friend Vector3 operator*(const Vector3& left, const Vector3& right)
+    {
+        return Vector3(left.x * right.x, left.y * right.y, left.z * right.z);
+    }
+
+    // Scalar multiplication
+    friend Vector3 operator*(const Vector3& vec, float scalar)
+    {
+        return Vector3(vec.x * scalar, vec.y * scalar, vec.z * scalar);
+    }
+
+    // Scalar multiplication
+    friend Vector3 operator*(float scalar, const Vector3& vec)
+    {
+        return Vector3(vec.x * scalar, vec.y * scalar, vec.z * scalar);
+    }
+
+    // Scalar *=
+    Vector3& operator*=(float scalar)
+    {
+        x *= scalar;
+        y *= scalar;
+        z *= scalar;
+        return *this;
+    }
+
+    // Vector +=
+    Vector3& operator+=(const Vector3& right)
+    {
+        x += right.x;
+        y += right.y;
+        z += right.z;
+        return *this;
+    }
+
+    // Vector -=
+    Vector3& operator-=(const Vector3& right)
+    {
+        x -= right.x;
+        y -= right.y;
+        z -= right.z;
+        return *this;
+    }
+
+    // Length squared of vector
+    float LengthSq() const
+    {
+        return (x*x + y*y + z*z);
+    }
+
+    // Length of vector
+    float Length() const
+    {
+        return (Math::Sqrt(LengthSq()));
+    }
+
+    // Normalize this vector
+    void Normalize()
+    {
+        float length = Length();
+        x /= length;
+        y /= length;
+        z /= length;
+    }
+
+    // Normalize the provided vector
+    static Vector3 Normalize(const Vector3& vec)
+    {
+        Vector3 temp = vec;
+        temp.Normalize();
+        return temp;
+    }
+
+    // Dot product between two vectors (a dot b)
+    static float Dot(const Vector3& a, const Vector3& b)
+    {
+        return (a.x * b.x + a.y * b.y + a.z * b.z);
+    }
+
+    // Cross product between two vectors (a cross b)
+    static Vector3 Cross(const Vector3& a, const Vector3& b)
+    {
+        Vector3 temp;
+        temp.x = a.y * b.z - a.z * b.y;
+        temp.y = a.z * b.x - a.x * b.z;
+        temp.z = a.x * b.y - a.y * b.x
+    }
 };
