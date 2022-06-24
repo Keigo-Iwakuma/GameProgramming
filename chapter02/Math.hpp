@@ -369,6 +369,25 @@ public:
         Vector3 temp;
         temp.x = a.y * b.z - a.z * b.y;
         temp.y = a.z * b.x - a.x * b.z;
-        temp.z = a.x * b.y - a.y * b.x
+        temp.z = a.x * b.y - a.y * b.x;
     }
+
+    // Lerp from A to B by f
+    static Vector3 Lerp(const Vector3& a, const Vector3& b, float f)
+    {
+        return Vector3(a + f * (b - a));
+    }
+
+    // Reflect V about (normalized) N
+    static Vector3 Reflect(const Vector3& v, const Vector3& n)
+    {
+        return v - 2.0f * Vector3::Dot(v, n) * n;
+    }
+
+    static Vector3 Transform(const Vector3& vec, const class Matrix4& mat, float w = 1.0f);
+    // This will transform the vector and renormalize the w component
+    static Vector3 TransformWithPerspDiv(const Vector3& vec, const class Matrix4& mat, float w = 1.0f);
+
+    // Transform a Vector3 by a quaternion
+    static Vector3 Transform(const Vector3& v, const class Quaternion& q);
 };
