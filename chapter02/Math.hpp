@@ -536,3 +536,18 @@ public:
 
     static const Matrix3 Identity;
 };
+
+
+// 4x4 Matrix
+class Matrix4
+{
+public:
+    float mat[4][4];
+
+    Matrix4()
+    {
+        *this = Matrix4::Identity;
+    }
+
+    static const Matrix4 Identity;
+};
