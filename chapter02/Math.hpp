@@ -549,5 +549,16 @@ public:
         *this = Matrix4::Identity;
     }
 
+    explicit Matrix4(float inMat[4][4])
+    {
+        memcpy(mat, inMat, 16 * sizeof(float));
+    }
+
+    // Cast to a const float pointer
+    const float* GetAsFloatPtr() const
+    {
+        return reinterpret_cast<const float*>(&mat[0][0]);
+    }
+
     static const Matrix4 Identity;
 };
