@@ -850,3 +850,65 @@ public:
 
     static const Matrix4 Identity;
 };
+
+// (Unit) Quaternion
+class Quaternion
+{
+public:
+    float x;
+    float y;
+    float z;
+    float w;
+
+    Quaternion()
+    {
+        *this = Quaternion::Identity;
+    }
+
+    // This directly sets the quaternion components --
+    // don't use for axis/angle
+    explicit Quaternion(float inX, float inY, float inZ, float inW)
+    {
+        Set(inX, inY, inZ, inW);
+    }
+
+    // Construct the quaternion from an axis and angle
+    // It is assumed that axis is already normalized,
+    // and the angle is in radians
+    explicit Quaternion(const Vector3& axis, float angle)
+    {
+        float scalar = Math::Sin(angle / 2.0f);
+        x = axis.x * scalar;
+        y = axis.y * scalar;
+        z = axis.z * scalar;
+        w = Math::Cos(angle / 2.0f);
+    }
+
+    // Directly set the internal components
+    void Set(float inX, float inY, float inZ, float inW)
+    {
+        x = inX;
+        y = inY;
+        z = inZ;
+        w = inW;
+    }
+
+    void Conjugate()
+    {
+        x *= -1.0f;
+        y *= -1.0f;
+        z *= -1.0f;
+    }
+
+    float LengthSq() const
+    {
+        return (x*x + y*y + z*z + w*w);
+    }
+
+    float Length() const
+    {
+        return Math::Sqrt(LengthSq());
+    }
+
+    static const Quaternion Identity;
+};
