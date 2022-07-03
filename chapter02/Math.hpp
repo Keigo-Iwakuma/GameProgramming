@@ -910,5 +910,34 @@ public:
         return Math::Sqrt(LengthSq());
     }
 
+    void Normalize()
+    {
+        float length = Length();
+        x /= length;
+        y /= length;
+        z /= length;
+        w /= length;
+    }
+
+    // Normalize the provided quaternion
+    static Quaternion Normalize(const Quaternion q)
+    {
+        Quaternion retVal = q;
+        retVal.Normalize();
+        return retVal;
+    }
+
+    // Linear interpolation
+    static Quaternion Lerp(const Quaternion& a, const Quaternion b, float f)
+    {
+        Quaternion retVal;
+        retVal.x = Math::Lerp(a.x, b.x, f);
+        retVal.y = Math::Lerp(a.y, b.y, f);
+        retVal.z = Math::Lerp(a.z, b.z, f);
+        retVal.w = Math::Lerp(a.w, b.w, f);
+        retVal.Normalize();
+        return retVal;
+    }
+
     static const Quaternion Identity;
 };
